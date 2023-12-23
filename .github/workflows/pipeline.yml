@@ -24,9 +24,6 @@ jobs:
             echo "skip_ci=false" >> $GITHUB_ENV
           fi
 
-      - name: Current skip_ci
-        run: echo "${{ env.skip_ci }}"
-
       - name: Checkout code and Use Node.js
         if: ${{ env.skip_ci == 'false' }}
         uses: actions/checkout@v4
