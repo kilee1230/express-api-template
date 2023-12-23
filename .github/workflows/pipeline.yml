@@ -15,7 +15,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "express-api-template" ]; then
             echo "Stopping job because it's a repository creation event."
-            exit 0  # This will exit the script and stop the job
+            exit 78 # This will exit the script and stop the job
           fi
 
       - uses: actions/checkout@v4
