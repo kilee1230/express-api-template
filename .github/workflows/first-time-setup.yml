@@ -39,7 +39,9 @@ jobs:
         run: |
           echo "
    
-          Personalized readme text. Hello ${{ github.repository_owner }}!
+          # ${{ github.repository }}
+
+          A minimalistic Express.js template for building APIs. This template provides a starting point for creating robust and scalable API projects using Express.js, a popular web framework for Node.js.
 
           " > README.md
 
