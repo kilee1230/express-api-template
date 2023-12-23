@@ -10,7 +10,7 @@ concurrency:
   group: first-time-setup
   cancel-in-progress: true
 
- permissions: 
+permissions: 
   actions: write
   checks: write
   contents: write
