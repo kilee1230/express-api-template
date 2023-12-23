@@ -11,7 +11,7 @@ const redactPaths = [
 ];
 
 const logMiddleware = logger({
-  name: "rest-api-template",
+  name: "express-api-template",
   level: "info",
   autoLogging: false,
   redact: {
