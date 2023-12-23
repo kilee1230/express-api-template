@@ -8,7 +8,8 @@ describe("GET /health", () => {
 
   it("responds with 200 OK", async () => {
     await expect(request.get("/health")).resolves.toMatchObject({
-      status: 200
+      status: 200,
+      body: { status: "ok" }
     });
   });
 });
