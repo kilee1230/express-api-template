@@ -28,23 +28,23 @@ jobs:
         run: echo "${{ env.skip_ci }}"
 
       - name: Checkout code and Use Node.js
-        if: ${{ env.skip_ci == false }}
+        if: ${{ !env.skip_ci }}
         uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}   
-        if: ${{ env.skip_ci == false }}
+        if: ${{ !env.skip_ci }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        if: ${{ env.skip_ci == false }}
+        if: ${{ !env.skip_ci }}
         run: yarn install
 
       - name: Lint
-        if: ${{ env.skip_ci == false }}
+        if: ${{ !env.skip_ci }}
         run: yarn lint
       
       - name: Test and Coverage
-        if: ${{ env.skip_ci == false }}
+        if: ${{ !env.skip_ci }}
         run: yarn test:coverage
