@@ -1,8 +1,8 @@
 {
   "name": "express-api-template",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Boilerplate for express api",
+  "main": "server.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json",
     "lint": "eslint --ext .ts ./src",
