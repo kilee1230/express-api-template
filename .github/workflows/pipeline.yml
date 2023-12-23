@@ -11,6 +11,12 @@ jobs:
         node-version: [18.x]
 
     steps:
+      - name: Check if it's a push event
+        if: github.event_name == 'create'
+        run: |
+          echo "This is a create new repo event, will skip current workflow"
+          exit 0 
+
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
