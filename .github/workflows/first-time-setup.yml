@@ -24,7 +24,7 @@ jobs:
 
       # remove files not needed for user instance of template
       - name: Remove unneeded files
-        run: rm -f README.md .github/**
+        run: rm -f README.md
 
       # personalize readme for user
       - name: Init readme
