@@ -16,30 +16,30 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
             echo "Stopping job because it's a repository creation event."
-            echo "skip_ci=true" >> "$GITHUB_STATE"
+            echo "skip_ci=true" >> $GITHUB_OUTPUT
           else
             echo "Proceeding with the job."
-            echo "skip_ci=false" >> "$GITHUB_STATE"
+            echo "skip_ci=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Checkout code and Use Node.js
-        if: ${{ "$skip_ci" == "false" }}
+        if: ${{ $GITHUB_OUTPUT == "false" }}
         uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}   
-        if: ${{ "$skip_ci" == "false" }}
+        if: ${{ $GITHUB_OUTPUT == "false" }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        if: ${{ "$skip_ci" == "false" }}
+        if: ${{ $GITHUB_OUTPUT == "false" }}
         run: yarn install
 
       - name: Lint
-        if: ${{ "$skip_ci" == "false" }}
+        if: ${{ $GITHUB_OUTPUT == "false" }}
         run: yarn lint
       
       - name: Test and Coverage
-        if: ${{ "$skip_ci" == "false" }}
+        if: ${{ $GITHUB_OUTPUT == "false" }}
         run: yarn test:coverage
