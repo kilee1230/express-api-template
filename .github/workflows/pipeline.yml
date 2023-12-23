@@ -10,16 +10,27 @@ jobs:
       matrix:
         node-version: [18.x]
 
+    outputs:
+      result: ${{ steps.set-status.outputs.result }}
+
     steps:
       - name: Check if it's a repository creation event
+        id: set-status
         run: |
           if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
             echo "Stopping job because it's a repository creation event."
-            exit 0 # This will exit the script and stop the job
+            echo "::set-output name=result::failure"
+          else
+            echo "Proceeding with the job."
+            echo "::set-output name=result::success"            
           fi
-      - uses: actions/checkout@v4
+
+      - name: Checkout code and Use Node.js
+        if: ${{ needs.build.outputs.result == 'success' }}
+        uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node-version }}   
-        if: success()     
+        if: ${{ needs.build.outputs.result == 'success' }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
