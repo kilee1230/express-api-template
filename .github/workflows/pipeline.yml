@@ -2,6 +2,11 @@ name: Node CI
 
 on: [push]
 
+
+  repository:
+    types:
+      - created
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,14 +16,15 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - name: Check if it's a push event
-        if: github.event_name == 'create'
+      - name: Check if it's a repository creation event
         run: |
-          echo "This is a create new repo event, will skip current workflow"
-          exit 0 
+          if [ "${{ github.event_name }}" == 'create' ]; then
+            echo "Stopping job because it's a repository creation event."
+            exit 0  # This will exit the script and stop the job
+          fi
 
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}        
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
