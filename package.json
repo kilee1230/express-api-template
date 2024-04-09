@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.build.json",
-    "lint": "eslint --ext .ts ./src",
+    "lint": "eslint -c .eslintrc.js src/**.ts",
     "lint:fix": "yarn lint --fix",
     "start:dev": "NODE_ENV=local nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts",
     "test": "jest",
