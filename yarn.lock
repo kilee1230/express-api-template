@@ -3704,10 +3704,10 @@ pino-abstract-transport@^1.2.0:
     readable-stream "^4.0.0"
     split2 "^4.0.0"
 
-pino-http@10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/pino-http/-/pino-http-10.0.0.tgz#5e222322295769ec7bfc5c10aaaad2d6026d3818"
-  integrity sha512-NcyR82qAsqHAWPYYbpk2EewMya+t4Urk1AY2LnjgZg/BM8HbZEbVpG+nNkWnE9ZvpYpXkLoPejsxMypiEMQbpg==
+pino-http@10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/pino-http/-/pino-http-10.1.0.tgz#ac052e0a4d9f959d86aa8af310887700cf6d29ac"
+  integrity sha512-rQgRaVfmZnDcOZXvZUUkiG3wDYVTSyYWAhxkGUgw3py3Y1nFXucRSLYPB5HKgG64oy9gLiDARiQxxWXnI1u3zA==
   dependencies:
     get-caller-file "^2.0.5"
     pino "^9.0.0"
