@@ -8,40 +8,40 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
-      
+        node-version: [20.x]
+
     env:
       skip_ci: false
 
     steps:
-      - name: Check if it's a repository creation event
-        run: |
-          if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
-            echo "Stopping job because it's a repository creation event."
-            echo "skip_ci=true" >> $GITHUB_ENV
-          else
-            echo "Proceeding with the job."
-            echo "skip_ci=false" >> $GITHUB_ENV
-          fi
+    - name: Check if it's a repository creation event
+      run: |
+        if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
+          echo "Stopping job because it's a repository creation event."
+          echo "skip_ci=true" >> $GITHUB_ENV
+        else
+          echo "Proceeding with the job."
+          echo "skip_ci=false" >> $GITHUB_ENV
+        fi
 
-      - name: Checkout code and Use Node.js
-        if: ${{ env.skip_ci == 'false' }}
-        uses: actions/checkout@v4
+    - name: Checkout code and Use Node.js
+      if: ${{ env.skip_ci == 'false' }}
+      uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}   
-        if: ${{ env.skip_ci == 'false' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
+      if: ${{ env.skip_ci == 'false' }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        if: ${{ env.skip_ci == 'false' }}
-        run: yarn install
+    - name: Install dependencies
+      if: ${{ env.skip_ci == 'false' }}
+      run: yarn install
 
-      - name: Lint
-        if: ${{ env.skip_ci == 'false' }}
-        run: yarn lint
-      
-      - name: Test and Coverage
-        if: ${{ env.skip_ci == 'false' }}
-        run: yarn test:coverage
+    - name: Lint
+      if: ${{ env.skip_ci == 'false' }}
+      run: yarn lint
+
+    - name: Test and Coverage
+      if: ${{ env.skip_ci == 'false' }}
+      run: yarn test:coverage
