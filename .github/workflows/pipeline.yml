@@ -6,10 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     env:
       skip_ci: false
 
@@ -24,24 +20,22 @@ jobs:
           echo "skip_ci=false" >> $GITHUB_ENV
         fi
 
-    - name: Checkout code and Use Node.js
+    - name: Checkout code
       if: ${{ env.skip_ci == 'false' }}
       uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Setup pnpm
       if: ${{ env.skip_ci == 'false' }}
-      uses: actions/setup-node@v4
+      uses: pnpm/action-setup@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        version: 9
+        run_install: true
 
-    - name: Install dependencies
-      if: ${{ env.skip_ci == 'false' }}
-      run: yarn install
 
     - name: Lint
       if: ${{ env.skip_ci == 'false' }}
-      run: yarn lint
+      run: pnpm lint
 
     - name: Test and Coverage
       if: ${{ env.skip_ci == 'false' }}
-      run: yarn test:coverage
+      run: pnpm test:coverage
