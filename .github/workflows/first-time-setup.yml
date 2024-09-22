@@ -10,7 +10,7 @@ concurrency:
   group: first-time-setup
   cancel-in-progress: true
 
-permissions: 
+permissions:
   actions: write
   checks: write
   contents: write
@@ -29,7 +29,6 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-
       # remove files not needed for user instance of template
       - name: Remove unneeded files
         run: rm -f README.md renovate.json & rm -rf .github
@@ -38,7 +37,7 @@ jobs:
       - name: Init readme
         run: |
           echo "
-   
+
           # ${{ github.event.repository.name }}
 
           A minimalistic Express.js template for building APIs. This template provides a starting point for creating robust and scalable API projects using Express.js, a popular web framework for Node.js.
@@ -50,6 +49,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Setup repo"
-          
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

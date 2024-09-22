@@ -10,32 +10,31 @@ jobs:
       skip_ci: false
 
     steps:
-    - name: Check if it's a repository creation event
-      run: |
-        if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
-          echo "Stopping job because it's a repository creation event."
-          echo "skip_ci=true" >> $GITHUB_ENV
-        else
-          echo "Proceeding with the job."
-          echo "skip_ci=false" >> $GITHUB_ENV
-        fi
+      - name: Check if it's a repository creation event
+        run: |
+          if [ "${{ github.event_name }}" == 'push' ] && [ "${{ github.repository }}" != "${{ github.actor }}/express-api-template" ]; then
+            echo "Stopping job because it's a repository creation event."
+            echo "skip_ci=true" >> $GITHUB_ENV
+          else
+            echo "Proceeding with the job."
+            echo "skip_ci=false" >> $GITHUB_ENV
+          fi
 
-    - name: Checkout code
-      if: ${{ env.skip_ci == 'false' }}
-      uses: actions/checkout@v4
+      - name: Checkout code
+        if: ${{ env.skip_ci == 'false' }}
+        uses: actions/checkout@v4
 
-    - name: Setup pnpm
-      if: ${{ env.skip_ci == 'false' }}
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-        run_install: true
+      - name: Setup pnpm
+        if: ${{ env.skip_ci == 'false' }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: true
 
+      - name: Lint
+        if: ${{ env.skip_ci == 'false' }}
+        run: pnpm lint
 
-    - name: Lint
-      if: ${{ env.skip_ci == 'false' }}
-      run: pnpm lint
-
-    - name: Test and Coverage
-      if: ${{ env.skip_ci == 'false' }}
-      run: pnpm test:coverage
+      - name: Test and Coverage
+        if: ${{ env.skip_ci == 'false' }}
+        run: pnpm test:coverage
