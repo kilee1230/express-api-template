@@ -19,7 +19,7 @@ const logMiddleware = logger({
     censor: "**REDACTED**"
   },
   formatters: {
-    level(label: string, _) {
+    level(label: string) {
       return { level: label };
     }
   },

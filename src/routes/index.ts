@@ -1,5 +1,7 @@
 import { Router } from "express";
 
-import { healthCheckHandler } from "./healthCheck";
+import healthCheckRouter from "./healthCheck";
 
-export const router = Router().get("/health", healthCheckHandler);
+export const router = Router();
+
+router.use("/health", healthCheckRouter);
