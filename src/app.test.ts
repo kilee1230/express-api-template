@@ -1,6 +1,6 @@
 import supertest from "supertest";
 
-import { createApp } from "./app";
+import { createApp } from "./app.js";
 
 describe("GET /health", () => {
   const app = createApp();

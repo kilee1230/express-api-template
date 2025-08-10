@@ -2,9 +2,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express, { Application } from "express";
 
-import { errorMiddleware } from "./middleware/error";
-import logMiddleware from "./middleware/logger";
-import { router } from "./routes";
+import { errorMiddleware } from "./middleware/error.js";
+import logMiddleware from "./middleware/logger.js";
+import { router } from "./routes/index.js";
 
 export const createApp = (): Application =>
   express()

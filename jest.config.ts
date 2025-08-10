@@ -1,15 +1,24 @@
 import { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
-  preset: "ts-jest",
+  preset: "ts-jest/presets/default-esm",
   rootDir: "./",
   testEnvironment: "node",
-  moduleFileExtensions: ["ts", "tsx", "js"],
+  extensionsToTreatAsEsm: [".ts"],
+  moduleFileExtensions: ["ts", "tsx", "js", "mjs"],
   testPathIgnorePatterns: ["/test\\.ts"],
   coveragePathIgnorePatterns: ["<rootDir>/src/middleware/.*.ts"],
   testRegex: "/src/.*.test.(ts|tsx|js)$",
   transform: {
-    "\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        useESM: true
+      }
+    ]
+  },
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
   },
   verbose: true,
   coverageThreshold: {
