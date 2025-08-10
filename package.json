@@ -10,11 +10,10 @@
     "lint": "eslint --config eslint.config.js",
     "lint:fix": "pnpm lint --fix",
     "start": "node dist/server.js",
-    "start:dev": "NODE_ENV=local nodemon --watch \"src/**/*.ts\" --exec \"ts-node --esm\" src/server.ts",
-    "test": "NODE_OPTIONS=\"--loader=ts-node/esm\" jest",
-    "test:coverage": "NODE_OPTIONS=\"--loader=ts-node/esm\" jest --coverage",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "prettier:fix": "prettier --write ."
+    "dev": "NODE_ENV=development nodemon --watch src --ext ts --exec \"npx tsx src/server.ts\"",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "keywords": [],
   "author": "",
@@ -49,7 +48,7 @@
     "rimraf": "6.0.1",
     "supertest": "7.1.4",
     "ts-jest": "29.4.1",
-    "ts-node": "10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "5.9.2"
   }
 }
