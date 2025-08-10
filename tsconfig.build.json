@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
   "exclude": ["**/*.test.*", "**/__mocks__/*", "**/__tests__/*"]
 }
