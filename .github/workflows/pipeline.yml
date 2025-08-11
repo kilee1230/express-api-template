@@ -22,7 +22,7 @@ jobs:
 
       - name: Checkout code
         if: ${{ env.skip_ci == 'false' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup pnpm
         if: ${{ env.skip_ci == 'false' }}
