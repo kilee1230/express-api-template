@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Application } from "express";
 
 import { errorMiddleware } from "./middleware/error";
+import etagMiddleware from "./middleware/etag";
 import logMiddleware from "./middleware/logger";
 import { router } from "./routes";
 
@@ -12,5 +13,6 @@ export const createApp = (): Application =>
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(logMiddleware)
+    .use(etagMiddleware)
     .use(errorMiddleware)
     .use(router);
