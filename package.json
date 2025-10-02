@@ -49,6 +49,6 @@
     "supertest": "7.1.4",
     "ts-jest": "29.4.1",
     "tsx": "^4.20.3",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   }
 }
